@@ -20,7 +20,7 @@ namespace WebApiFinalValentiniMariela.Controllers
             this.Context = context;
         }
 
-        //GET /api/medico
+        //GET /api/medico/lista
 
         [HttpGet("/api/medico/lista")]
 
@@ -41,16 +41,17 @@ namespace WebApiFinalValentiniMariela.Controllers
 
         //GET /api/medico/id
 
-        //[HttpGet("/api/medico/{id}", Name = "ObtenerMedico")]
+        [HttpGet("/api/medico/{id}", Name = "ObtenerMedico")]
 
-        //public ActionResult<Medico> Get(int id)
-        //{
-        //    var resultado = Context.Medicos.FirstOrDefault(x => x.Doctor_No == id);
-        //    if (resultado == null)
-        //    { return NotFound(); }
-        //    return resultado;
-        //}
+        public ActionResult<Medico> Get(int id)
+        {
+            var resultado = Context.Medicos.FirstOrDefault(x => x.Doctor_No == id);
+            if (resultado == null)
+            { return NotFound(); }
+            return resultado;
+        }
 
+        //GET /api/medico/especialidad
 
         [HttpGet("/api/medico/{especialidad}")]
 
@@ -73,7 +74,7 @@ namespace WebApiFinalValentiniMariela.Controllers
 
         [HttpPut("{id}")]
 
-        public ActionResult Put(int id, [FromBody] Medico value)
+        public ActionResult Put(int id, [FromBody] Medico value) //Modifica un medico por id
         {
             if (id != value.Doctor_No)
             {
@@ -85,7 +86,7 @@ namespace WebApiFinalValentiniMariela.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Medico> Delete(int id)
+        public ActionResult<Medico> Delete(int id) //Elimina un medico por id
         {
             var resultado = Context.Medicos.FirstOrDefault(x => x.Doctor_No ==
             id);
